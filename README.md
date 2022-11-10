@@ -41,7 +41,7 @@ Each of these contains the 'vanilla' app and the files for the appropriate build
 
 ### Running the builds
 
-#### Gradle:
+#### Gradle
 - from the command line, `cd` to the [vanilla application folder](./builds/gradle/vanilla/)
 - to build and run the application in one go `./gradlew bootRun`
 - to build the jar `./gradlew assemble`
