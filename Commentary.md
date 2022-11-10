@@ -33,3 +33,86 @@ Since the release candidate for Spring Boot 3 is [now available](https://spring.
 So lets have a go at using the Spring Boot 3 release candidate and GraalVM to create a simple web application, compiled to a native executable.
 
 ### Pre - requisites
+
+You need to have GraalVM and it's `native-image` tool installed on your machine.
+
+You can download these from [here](https://www.graalvm.org/downloads/).
+
+Note that you need GraalVM 22.**3**.0 and the equivalent version of `native-image`.
+
+I'm using GraalVM Enterprise and `native-image` 22.3.0
+
+![GraalVM and native image versions](./illustrations/GraalVM_Native_Image.png)
+
+### The Spring Boot App
+The easiest way to get started with building a Spring Boot app is to use the [spring initializr](https://start.spring.io/).
+
+I'm going to walk through using both Maven and Gradle, so you can pick whichever one you pefer.
+
+You can either enter the configuration by hand, or re use one of:
+- [Gradle configuration](https://start.spring.io/#!type=gradle-project&language=java&platformVersion=3.0.0-RC1&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=vanilla&name=vanilla&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.vanilla&dependencies=native,web)
+- [Maven configuration](https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.0-RC1&packaging=jar&jvmVersion=17&groupId=com.example&artifactId=vanilla&name=vanilla&description=Demo%20project%20for%20Spring%20Boot&packageName=com.example.vanilla&dependencies=native,web)
+
+After choosing the build engine, I selected:
+- Spring Boot: 3.0.0 (RC1)
+- Language: Java
+- Artifact: Vanilla
+- Dependencies:
+  - GraalVM Native Support
+  - Spring Web
+
+Once you are happy with your configuration click the "GENERATE" button.
+
+Then copy the downloaded file to a directory of your choice, unzip it and `cd` into the `vanilla` directory.
+
+#### Gradle
+
+Start by running the application:
+
+`./gradlew bootRun`
+
+The application should start in a second or so:
+
+![](./illustrations/gradle/bootrun.png)
+
+You can use `curl localhost:8080` to test the application:
+
+![](./illustrations/gradle/404.png)
+
+`404` isn't a good look, so let's add a `RestController` to say something more meaningful.
+
+Copy [Hello.java](./code/Hello.java) from the code directory into `./src/main/java/com/example/vanilla` (or write your own).
+
+If we run the application (`./gradlew bootRun`) and test it (`curl localhost:8080`) again we should see a more meaningful response this time:
+
+![](./illustrations/gradle/Hello.png)
+
+We can also build a stand alone jar:
+
+`./gradlew assemble`
+
+And run that:
+
+`java -jar ./build/libs/vanilla-0.0.1-SNAPSHOT.jar`
+
+Again you should see the app start in about a second:
+
+![](./illustrations/gradle/from-jar.png)
+
+So now we can take the next step and build our native image without having to make any changes to the project:
+
+`./gradlew nativeCompile`
+
+This may be a good opportunity as it will take two or three minutes as opposed to a couple of seconds for building a jar (_on my Mac, YMMV_).
+
+Once the build completes:
+
+![](./illustrations/gradle/build-complete.png)
+
+We can run the executable `./build/native/nativeCompile/vanilla`
+
+You should see the application start in around ~0.1 seconds (so about 10x faster).
+
+![](./illustrations/gradle/run-native.png)
+
+Looking at memory usage on my machine, the `native image` uses about 1/3 of the memory compared to running the application from the `jar`.

@@ -3,7 +3,7 @@
 
 ## Pre - Requisites
 
-Make sure that you are using GraalVM 22.3.0 or better and equivalent version of native-image.
+Make sure that you are using GraalVM _22.**3**.0_ or better and the equivalent version of native-image.
 
 ## Spring Initializr
 Use [Spring Initializr](https://start.spring.io/) to get started.
