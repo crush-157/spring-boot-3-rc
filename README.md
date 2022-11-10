@@ -26,7 +26,7 @@ Each folder contains:
 - generated skeleton application (vanilla.zip)
 - screenshot of the configuration used
 
-### [code](./code/)
+### [code](./code/)
 Contains a simple controller for the sample app [Hello.java](./code/Hello.java) (404 is not a great respoonse).
 
 `Hello.java` has been added to the src tree under each of the [builds](./builds/).
