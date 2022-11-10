@@ -116,3 +116,68 @@ You should see the application start in around ~0.1 seconds (so about 10x faster
 ![](./illustrations/gradle/run-native.png)
 
 Looking at memory usage on my machine, the `native image` uses about 1/3 of the memory compared to running the application from the `jar`.
+
+#### Maven
+
+Before you start, make sure that `$JAVA_HOME` is set to point to your GraalVM installation:
+
+```
+$ $JAVA_HOME/bin/java --version
+java 17.0.5 2022-10-18 LTS
+Java(TM) SE Runtime Environment GraalVM EE 22.3.0 (build 17.0.5+9-LTS-jvmci-22.3-b07)
+Java HotSpot(TM) 64-Bit Server VM GraalVM EE 22.3.0 (build 17.0.5+9-LTS-jvmci-22.3-b07, mixed mode, sharing)
+```
+
+Then run the application:
+
+`./mvnw spring-boot:run`
+
+The application should start in a second or so:
+
+![](./illustrations/maven/bootrun.png)
+
+You can use `curl localhost:8080` to test the application:
+
+![](./illustrations/maven/404.png)
+
+`404` isn't a good look, so let's add a `RestController` to say something more meaningful.
+
+Copy [Hello.java](./code/Hello.java) from the code directory into `./src/main/java/com/example/vanilla` (or write your own).
+
+If we run the application (`./mvnw spring-boot:run`) and test it (`curl localhost:8080`) again we should see a more meaningful response this time:
+
+![](./illustrations/maven/Hello.png)
+
+We can also build a stand alone jar:
+
+`/.mvnw package`
+
+And run that:
+
+`java -jar ./target/vanilla-0.0.1-SNAPSHOT.jar`
+
+Again you should see the app start in about a second.
+
+So now we can take the next step and build our native image without having to make any changes to the project:
+
+`./gradlew nativeCompile`
+
+This may be a good opportunity as it will take two or three minutes as opposed to a couple of seconds for building a jar (_on my Mac, YMMV_).
+
+Once the build completes:
+
+![](./illustrations/maven/native-build.png)
+
+We can run the executable `./build/native/nativeCompile/vanilla`
+
+You should see the application start in around ~0.1 seconds (so about 10x faster).
+
+![](./illustrations/maven/native-run.png)
+
+Looking at memory usage on my machine, the `native image` uses about 1/3 of the memory compared to running the application from the `jar`.
+
+## Summary
+
+So in summary, with Srpring Boot 3.0, you can now easily leverage GraalVM Native image to build your applications as native executables.
+
+Enjoy your faster startup, lower latency and lower infrastructure costs.
