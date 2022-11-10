@@ -134,7 +134,7 @@ Then run the application:
 
 The application should start in a second or so:
 
-![](./illustrations/maven/bootrun.png)
+![](./illustrations/maven/spring-boot-run.png)
 
 You can use `curl localhost:8080` to test the application:
 
