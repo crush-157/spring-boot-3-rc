@@ -14,7 +14,7 @@ A native image can run standalone without relying on a JVM.
 This approach potentially offers advantages in terms of:
 - faster application startup
 - lower latency
-- reduced infrastructure footprint and cost
+- lower memory and CPU footprint and cost
 
 [GraalVM](https://www.graalvm.org) is an open source JDK that can compile Java applications to native images, as well as bytecode in the traditional way.
 
@@ -103,7 +103,7 @@ So now we can take the next step and build our native image without having to ma
 
 `./gradlew nativeCompile`
 
-This may be a good opportunity as it will take two or three minutes as opposed to a couple of seconds for building a jar (_on my Mac, YMMV_).
+This may be a good opportunity to have a tea or coffee as it will take two or three minutes as opposed to a couple of seconds for building a jar (_on my Mac, YMMV_).
 
 Once the build completes:
 
@@ -160,7 +160,7 @@ Again you should see the app start in about a second.
 
 So now we can take the next step and build our native image without having to make any changes to the project:
 
-`./gradlew nativeCompile`
+`./mvnw -Pnative native:compile`
 
 This may be a good opportunity as it will take two or three minutes as opposed to a couple of seconds for building a jar (_on my Mac, YMMV_).
 
