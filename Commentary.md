@@ -168,7 +168,7 @@ Once the build completes:
 
 ![](./illustrations/maven/native-build.png)
 
-We can run the executable `./build/native/nativeCompile/vanilla`
+We can run the executable `./target/vanilla`
 
 You should see the application start in around ~0.1 seconds (so about 10x faster).
 
@@ -176,8 +176,8 @@ You should see the application start in around ~0.1 seconds (so about 10x faster
 
 Looking at memory usage on my machine, the `native image` uses about 1/3 of the memory compared to running the application from the `jar`.
 
-## Summary
+## Summary
 
-So in summary, with Srpring Boot 3.0, you can now easily leverage GraalVM Native image to build your applications as native executables.
+So in summary, with Spring Boot 3.0, you can now easily leverage GraalVM Native image to build your applications as native executables.
 
 Enjoy your faster startup, lower latency and lower infrastructure costs.
