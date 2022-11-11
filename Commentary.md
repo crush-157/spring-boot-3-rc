@@ -5,7 +5,7 @@
 There has been a lot of interest in the past few years about "native Java".  You've probably read articles or seen conference talks on the subject.
 
 ### TL;DR - "native Java"
-Traditionally Java programs are compiled to bytecode that is then interpreted by a JVM.
+Traditionally Java programs are compiled to bytecode.  At runtime the bytecode is first interpreted and eventually compiled to native machine code by a JVM.
 
 Native Java is the idea of using ahead-of-time (AOT) compilation to produce a native executable or "native image" for a Java application.
 
